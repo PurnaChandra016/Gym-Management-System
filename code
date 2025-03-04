@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_MEMBERS 100
+
+struct Member {
+    char name[50];
+    int id;
+    int age;
+};
+struct Member members[MAX_MEMBERS];
+int memberCount = 0;
+
+void addMember() {
+    if (memberCount < MAX_MEMBERS) {
+        struct Member newMember;
+        printf("Enter member name: ");
+        scanf(" %49[^\n]", newMember.name); 
+        printf("Enter member ID: ");
+        scanf("%d", &newMember.id);
+        printf("Enter member age: ");
+        scanf("%d", &newMember.age);
+        
+        members[memberCount++] = newMember;
+        printf("Member added successfully!\n");
+
+    } else {
+        printf("Maximum member limit reached.\n");
+    }
+}
+
+void displayMembers() {
+    if (memberCount == 0) {
+        printf("No members in the gym.\n");
+    } else {
+        printf("Gym Members:\n");
+        for (int i = 0; i < memberCount; i++) {
+            printf("Name: %s, ID: %d, Age: %d\n", members[i].name, members[i].id, members[i].age);
+        }
+    }
+}
+
+int main() {
+    int choice;
+    
+    do {
+        printf("\nGym Management System\n");
+        printf("1. Add Member\n");
+        printf("2. Display Members\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        
+        switch (choice) {
+            case 1:
+                addMember();
+                break;
+            case 2:
+                displayMembers();
+                break;
+            case 3:
+                printf("Exiting the program.\n");
+                break;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    } while (choice != 3);
+
+    return 0;
+}
